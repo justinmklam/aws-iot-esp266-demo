@@ -40,7 +40,7 @@ void setup()
   Serial.begin(115200);
   delay(100);
 
-  WiFi.hostname("levain-monitor");
+  WiFi.hostname("<HOSTNAME>");
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, pass);
   waitUntilWifiConnected(String("Attempting to connect to SSID: ") + String(ssid));
@@ -48,9 +48,9 @@ void setup()
   // Pacific standard time = UTC -7
   configTimeWithNTP(-7, false);
 
-  awsClient.setThingname("levain-monitor");
-  awsClient.setPublishTopic("esp8266/data");
-  awsClient.setHost("a292sjcsigiv8t-ats.iot.us-west-2.amazonaws.com");
+  awsClient.setThingname("<THINGNAME>");
+  awsClient.setPublishTopic("<TOPIC>");
+  awsClient.setHost("XXXXXXXXX-ats.iot.us-west-2.amazonaws.com");
 
 #if LOAD_KEYS_FROM_SPIFFS
   awsClient.loadCertificatesFromSPIFFS();
@@ -63,8 +63,8 @@ void setup()
 #endif
 
   // Optional
-  awsClient.setShadowTopic("$aws/things/levain-monitor/shadow/update");
-  awsClient.setSubscribeTopic("$aws/things/levain-monitor/shadow/update");
+  awsClient.setShadowTopic("$aws/things/<THINGNAME>/shadow/update");
+  awsClient.setSubscribeTopic("$aws/things/<THINGNAME>/shadow/update");
   awsClient.setCallback(messageReceivedCallback);
 
   awsClient.connect();
